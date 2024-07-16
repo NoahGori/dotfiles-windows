@@ -28,7 +28,7 @@ New-Item $DotfilesFolder -ItemType directory;
 
 # Download Dotfiles repository as Zip
 Try {
-  Invoke-WebRequest $GitHubRepositoryUri -O $ZipRepositoryFile;
+  Invoke-WebRequest $GitHubRepositoryUri -OutFile $ZipRepositoryFile;
   $DownloadResult = $TRUE;
 }
 catch [System.Net.WebException] {
