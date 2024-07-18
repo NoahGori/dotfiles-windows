@@ -103,9 +103,12 @@ function Set-Zsh-As-Default-In-Ubuntu {
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
-wsl --install
-refreshenv
-
+$WSLInstallStatus = wsl --version;
+if ($WSLInstallStatus -ne $null) {
+  Write-Host "WSL not installed. Attempting to install";
+  wsl --install
+  refreshenv
+}
 
 $UbuntuInstallStatus = wsl -l |Where-Object {$_.Replace("`0","") -match '^Ubuntu'}
 if ($UbuntuInstallStatus -eq $null) {
