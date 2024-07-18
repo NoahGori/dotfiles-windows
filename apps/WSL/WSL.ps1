@@ -108,13 +108,10 @@ refreshenv
 wsl --install -d Ubuntu
 refreshenv
 
-
-wsl -e bash -c "echo Hello"
-Do {
-  wsl -e bash -c "echo Hello"
-  Start-Sleep -Seconds 5;
-} While ($LASTEXITCODE -eq -1)
-
+$UbuntuInstallStatus = wsl -l |Where {$_.Replace("`0","") -match '^Ubuntu'}
+if ($UbuntuInstallStatus -eq $null) {
+  Write-Host "Ubuntu not installed"
+}
 
 Update-Ubuntu-Packages-Repository;
 Update-Ubuntu-Packages;
