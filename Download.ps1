@@ -14,6 +14,7 @@ $GitUserEmail = Read-Host -Prompt "Input your Git user email here";
 
 do {
   $WorkComputer = Read-Host -Prompt "Is this a work machine? (y/n)";
+  Write-Host "Got $WorkComputer"
 }
 while ($WorkComputer -ne "y" -or $WorkComputer -ne "n")
 
