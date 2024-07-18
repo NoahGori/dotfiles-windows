@@ -104,7 +104,7 @@ function Set-Zsh-As-Default-In-Ubuntu {
 }
 
 $WSLInstallStatus = wsl --version;
-if ($WSLInstallStatus -ne $null) {
+if ($WSLInstallStatus -eq $null) {
   Write-Host "WSL not installed. Attempting to install";
   wsl --install
   refreshenv
