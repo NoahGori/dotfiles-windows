@@ -12,7 +12,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "horizontal",
+        "split": "down",
         "splitMode": "duplicate"
       },
       "keys": "alt+shift+h"
@@ -20,7 +20,7 @@
     {
       "command": {
         "action": "splitPane",
-        "split": "vertical",
+        "split": "right",
         "splitMode": "duplicate"
       },
       "keys": "alt+shift+v"
@@ -33,7 +33,6 @@
   "focusFollowMouse": true,
   "profiles": {
     "defaults": {
-      "acrylicOpacity": 0.85,
       "antialiasingMode": "cleartype",
       "bellStyle": "taskbar",
       "colorScheme": "One Half Dark",
@@ -51,14 +50,14 @@
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell",
-        "startingDirectory": __STARTING_WINDOWS_DIRECTORY__
+        "startingDirectory": "H:\\"
       },
       {
         "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
         "hidden": false,
         "name": "Ubuntu-20.04",
         "source": "Windows.Terminal.Wsl",
-        "startingDirectory": __STARTING_UBUNTU_DIRECTORY__
+        "startingDirectory": "/mnt/h/"
       },
       {
         "commandline": "cmd.exe",

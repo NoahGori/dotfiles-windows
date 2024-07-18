@@ -54,7 +54,8 @@ function Open-Close-WindowsTerminal {
   Stop-Process -Name "WindowsTerminal" -Force;
 }
 
-Install-Module -Name "oh-my-posh";
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+
 Install-Module -Name "posh-git" -Repository "PSGallery";
 Install-Module -Name "Terminal-Icons" -Repository "PSGallery";
 Install-Module -Name "PSWebSearch" -Repository "PSGallery";
