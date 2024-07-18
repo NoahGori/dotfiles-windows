@@ -1,13 +1,13 @@
-$GitHubRepositoryAuthor = "JMOrbegoso";
-$GitHubRepositoryName = "Dotfiles-for-Windows-11";
+$GitHubRepositoryAuthor = "NoahGori";
+$GitHubRepositoryName = "dotfiles-windows";
 $DotfilesFolder = Join-Path -Path $HOME -ChildPath ".dotfiles";
-$DotfilesWorkFolder = Join-Path -Path $DotfilesFolder -ChildPath "${GitHubRepositoryName}-main" | Join-Path -ChildPath "src";
+$DotfilesWorkFolder = Join-Path -Path $DotfilesFolder -ChildPath "${GitHubRepositoryName}-main" | Join-Path -ChildPath "apps";
 $DotfilesHelpersFolder = Join-Path -Path $DotfilesWorkFolder -ChildPath "Helpers";
 $DotfilesConfigFile = Join-Path -Path $DotfilesFolder -ChildPath "${GitHubRepositoryName}-main" | Join-Path -ChildPath "config.json";
 
 Write-Host "Welcome to Dotfiles for Microsoft Windows 11" -ForegroundColor "Yellow";
 Write-Host "Please don't use your device while the script is running." -ForegroundColor "Yellow";
-<# 
+
 # Load helpers
 Write-Host "Loading helpers:" -ForegroundColor "Green";
 $DotfilesHelpers = Get-ChildItem -Path "${DotfilesHelpersFolder}\*" -Include *.ps1 -Recurse;
@@ -15,7 +15,7 @@ foreach ($DotfilesHelper in $DotfilesHelpers) {
   . $DotfilesHelper;
 };
 
-# Save user configuration in persistence
+# Save user configuration in persistencea
 Set-Configuration-File -DotfilesConfigFile $DotfilesConfigFile -ComputerName $ComputerName -GitUserName $GitUserName -GitUserEmail $GitUserEmail -WorkspaceDisk $WorkspaceDisk;
 
 # Load user configuration from persistence
@@ -48,10 +48,8 @@ Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "WorkspaceFold
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Chocolatey" | Join-Path -ChildPath "Chocolatey.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Fonts" | Join-Path -ChildPath "Fonts.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Git" | Join-Path -ChildPath "Git.ps1");
-Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Vim" | Join-Path -ChildPath "Vim.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "VSCode" | Join-Path -ChildPath "VSCode.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "WindowsTerminal" | Join-Path -ChildPath "WindowsTerminal.ps1");
-Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Notepad++" | Join-Path -ChildPath "Notepad++.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Dotnet" | Join-Path -ChildPath "Dotnet.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "WSL.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Docker" | Join-Path -ChildPath "Docker.ps1");
@@ -71,4 +69,4 @@ Write-Host "The process has finished." -ForegroundColor "Yellow";
 
 Write-Host "Restarting the PC in 10 seconds..." -ForegroundColor "Green";
 Start-Sleep -Seconds 10;
-Restart-Computer; #>
+Restart-Computer;
