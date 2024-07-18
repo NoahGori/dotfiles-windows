@@ -70,7 +70,7 @@
               "icon": "H:\\images\\purpose-based\\icons\\lumicons\\Term PS.ico",
               "name": "PowerShell",
               "source": "Windows.Terminal.PowershellCore",
-              "startingDirectory": "__STARTING_WINDOWS_DIRECTORY__"
+              "startingDirectory": __STARTING_WINDOWS_DIRECTORY__
           },
           {
               "commandline": "ubuntu.exe",
@@ -78,7 +78,7 @@
               "hidden": false,
               "icon": "H:\\images\\purpose-based\\icons\\lumicons\\Term Sdo.ico",
               "name": "Ubuntu",
-              "startingDirectory": "__STARTING_UBUNTU_DIRECTORY__",
+              "startingDirectory": __STARTING_UBUNTU_DIRECTORY__,
               "tabTitle": "Ubuntu"
           },
           {
@@ -88,7 +88,7 @@
               "hidden": false,
               "icon": "H:\\images\\purpose-based\\icons\\lumicons\\Term PS.ico",
               "name": "PowerShell (Administrator)",
-              "startingDirectory": "__STARTING_WINDOWS_DIRECTORY__"
+              "startingDirectory": __STARTING_WINDOWS_DIRECTORY__
           },
           {
               "commandline": "ubuntu.exe",
@@ -97,7 +97,7 @@
               "hidden": false,
               "icon": "H:\\images\\purpose-based\\icons\\lumicons\\Term Sdo.ico",
               "name": "Ubuntu (Administrator)",
-              "startingDirectory": "__STARTING_UBUNTU_DIRECTORY__",
+              "startingDirectory": __STARTING_UBUNTU_DIRECTORY__,
               "tabTitle": "Ubuntu"
           }
       ]
