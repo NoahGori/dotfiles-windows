@@ -14,9 +14,9 @@ $GitUserEmail = Read-Host -Prompt "Input your Git user email here";
 
 do {
   $WorkComputer = Read-Host -Prompt "Is this a work machine? (y/n)";
-  Write-Host "Got $WorkComputer"
+  Write-Host "Got $WorkComputer";
 }
-while ($WorkComputer -ne "y" -or $WorkComputer -ne "n")
+while ($WorkComputer -ne "y" -and $WorkComputer -ne "n")
 
 
 $ValidDisks = Get-PSDrive -PSProvider "FileSystem" | Select-Object -ExpandProperty "Root";
