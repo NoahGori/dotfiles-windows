@@ -108,23 +108,13 @@ refreshenv
 wsl --install -d Ubuntu
 refreshenv
 
-$ErrorActionPreferenceBak = 1
-$ErrorActionPreference    = 'Stop'
 
-While($True){
-  try{
-      wsl -e bash -c "echo Hello"
-      break
-  }
-  catch{
-      Write-Output "Ubuntu installation not completed"
-      Start-Sleep -Seconds 2 # wait for a seconds before next attempt.
-  }
-  finally{
-      #Reset the erroracton preference
-      $ErrorActionPreference = $ErrorActionPreferenceBak
-  }
-}
+wsl -e bash -c "echo Hello"
+Do {
+  wsl -e bash -c "echo Hello"
+  Start-Sleep -Seconds 5;
+} While ($LASTEXITCODE -eq -1)
+
 
 Update-Ubuntu-Packages-Repository;
 Update-Ubuntu-Packages;
