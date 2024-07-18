@@ -30,16 +30,16 @@ function Set-Git-Configuration-In-Ubuntu {
   Write-Host "Git was successfully configured in Ubuntu." -ForegroundColor "Green";
 }
 
-function Install-VSCode-Extensions-In-ubuntu run {
+function Install-VSCode-Extensions-In-WSL {
   Write-Host "Installing Visual Studio Code extensions in WSL:" -ForegroundColor "Green";
 
-  ubuntu run code --install-extension ue.alphabetical-sorter;
-  ubuntu run code --install-extension ms-azuretools.vscode-docker;
-  ubuntu run code --install-extension eamodio.gitlens;
-  ubuntu run code --install-extension oderwat.indent-rainbow;
-  ubuntu run code --install-extension davidanson.vscode-markdownlint;
-  ubuntu run code --install-extension esbenp.prettier-vscode;
-  ubuntu run code --install-extension rangav.vscode-thunder-client;
+  ubuntu run code-insiders --install-extension ue.alphabetical-sorter;
+  ubuntu run code-insiders --install-extension ms-azuretools.vscode-docker;
+  ubuntu run code-insiders --install-extension eamodio.gitlens;
+  ubuntu run code-insiders --install-extension oderwat.indent-rainbow;
+  ubuntu run code-insiders --install-extension davidanson.vscode-markdownlint;
+  ubuntu run code-insiders --install-extension esbenp.prettier-vscode;
+  ubuntu run code-insiders --install-extension rangav.vscode-thunder-client;
 }
 
 
@@ -48,7 +48,7 @@ function Install-OhMyZsh-In-Ubuntu {
 
   Invoke-WebRequest -o $DotfilesOhMyZshInstallerPath https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh;
 
-  $WslOhMyZshInstallerPath = ubuntu run wslpath $DotfilesOhMyZshInstallerPath.Replace("\", "\\");
+  $WslOhMyZshInstallerPath = wsl wslpath $DotfilesOhMyZshInstallerPath.Replace("\", "\\");
   
   Write-Host "Installing Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
   
@@ -67,7 +67,7 @@ function Install-Zsh-Autosuggestions {
 
 function Install-OhMyZsh-Theme-In-Ubuntu {
   $DotfilesOhMyZshThemePath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "paradox.zsh-theme";
-  $WslOhMyZshThemePath = ubuntu run wslpath $DotfilesOhMyZshThemePath.Replace("\", "\\");
+  $WslOhMyZshThemePath = wsl wslpath $DotfilesOhMyZshThemePath.Replace("\", "\\");
 
   Write-Host "Installing Paradox theme for Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
 
@@ -87,7 +87,7 @@ function Install-OhMyZsh-Functions-In-Ubuntu {
 
 function Set-OhMyZsh-Configuration-In-Ubuntu {
   $DotfilesZshrcPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath ".zshrc";
-  $WslZshrcPath = ubuntu run wslpath $DotfilesZshrcPath.Replace("\", "\\");
+  $WslZshrcPath = wsl wslpath $DotfilesZshrcPath.Replace("\", "\\");
 
   Write-Host "Configuring Zsh in Ubuntu:" -ForegroundColor "Green";
   
@@ -108,7 +108,7 @@ refreshenv
 ubuntu run --install -d Ubuntu
 refreshenv
 
-$UbuntuInstallStatus = ubuntu run -l |Where {$_.Replace("`0","") -match '^Ubuntu'}
+$UbuntuInstallStatus = wsl -l |Where-Object {$_.Replace("`0","") -match '^Ubuntu'}
 if ($UbuntuInstallStatus -eq $null) {
   Write-Host "Ubuntu not installed. PC will restart in 10 seconds";
   
@@ -116,7 +116,7 @@ if ($UbuntuInstallStatus -eq $null) {
 }
 else {
   Write-Host "Ubuntu installed! Proceeding with dotfiles script";
-  ubuntu run --set-default Ubuntu
+  wsl --set-default Ubuntu
 }
 
 Update-Ubuntu-Packages-Repository;

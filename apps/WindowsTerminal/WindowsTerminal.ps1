@@ -37,7 +37,7 @@ function Set-WindowsTerminal-Settings {
   
   (Get-Content -path $WindowsTerminalSettingsFilePath) -replace "__STARTING_WINDOWS_DIRECTORY__", ($WorkspaceFolder | ConvertTo-Json) | Set-Content -Path $WindowsTerminalSettingsFilePath;
 
-  $UbuntuStartingDirectory = ubuntu run wslpath -w "~/Workspace";
+  $UbuntuStartingDirectory = wsl wslpath -w "~/Workspace";
   (Get-Content -path $WindowsTerminalSettingsFilePath) -replace "__STARTING_UBUNTU_DIRECTORY__", ($UbuntuStartingDirectory | ConvertTo-Json) | Set-Content -Path $WindowsTerminalSettingsFilePath;
 
   Write-Host "Windows Terminal was successfully configured." -ForegroundColor "Green";
