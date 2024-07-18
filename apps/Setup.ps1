@@ -67,5 +67,6 @@ Remove-Item $DotfilesFolder -Recurse -Force -ErrorAction SilentlyContinue;
 
 Write-Host "The process has finished." -ForegroundColor "Yellow";
 
-Write-Host "Restarting the PC in 10 seconds..." -ForegroundColor "Green";
-Start-Sleep -Seconds 10;
+Write-Host "Restarting the PC in 20 seconds..." -ForegroundColor "Green";
+Start-Sleep -Seconds 20;
+Restart-Computer;
