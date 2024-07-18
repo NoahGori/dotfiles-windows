@@ -110,7 +110,8 @@ refreshenv
 
 $UbuntuInstallStatus = wsl -l |Where {$_.Replace("`0","") -match '^Ubuntu'}
 if ($UbuntuInstallStatus -eq $null) {
-  Write-Host "Ubuntu not installed"
+  Write-Host "Ubuntu not installed";
+  Start-Sleep -Seconds 10;
 }
 
 Update-Ubuntu-Packages-Repository;
