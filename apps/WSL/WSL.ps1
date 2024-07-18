@@ -107,6 +107,20 @@ wsl --install
 refreshenv
 wsl --install -d Ubuntu
 refreshenv
+While($True){
+  try{
+      wsl -e bash -c "echo Hello"
+      break
+  }
+  catch{
+      Write-Output "Ubuntu installation not completed"
+      Start-Sleep -Seconds 2 # wait for a seconds before next attempt.
+  }
+  finally{
+      #Reset the erroracton preference
+      $ErrorActionPreference = $ErrorActionPreferenceBak
+  }
+}
 
 Update-Ubuntu-Packages-Repository;
 Update-Ubuntu-Packages;
