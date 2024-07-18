@@ -16,7 +16,7 @@ foreach ($DotfilesHelper in $DotfilesHelpers) {
 };
 
 # Save user configuration in persistencea
-Set-Configuration-File -DotfilesConfigFile $DotfilesConfigFile -ComputerName $ComputerName -GitUserName $GitUserName -GitUserEmail $GitUserEmail -WorkspaceDisk $WorkspaceDisk;
+Set-Configuration-File -DotfilesConfigFile $DotfilesConfigFile -GitUserName $GitUserName -GitUserEmail $GitUserEmail -WorkspaceDisk $WorkspaceDisk;
 
 # Load user configuration from persistence
 $Config = Get-Configuration-File -DotfilesConfigFile $DotfilesConfigFile;
@@ -69,4 +69,3 @@ Write-Host "The process has finished." -ForegroundColor "Yellow";
 
 Write-Host "Restarting the PC in 10 seconds..." -ForegroundColor "Green";
 Start-Sleep -Seconds 10;
-Restart-Computer;
