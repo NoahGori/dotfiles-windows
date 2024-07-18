@@ -107,6 +107,10 @@ wsl --install
 refreshenv
 wsl --install -d Ubuntu
 refreshenv
+
+$ErrorActionPreferenceBak = 1
+$ErrorActionPreference    = 'Stop'
+
 While($True){
   try{
       wsl -e bash -c "echo Hello"
