@@ -103,9 +103,9 @@ function Set-Zsh-As-Default-In-Ubuntu {
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
-choco install -y "wsl2" --params "/Version:2 /Retry:true";
+wsl --install
 refreshenv
-choco install -y "wsl-ubuntu-2204" --params "/InstallRoot:true" --execution-timeout 3600;
+wsl --install -d Ubuntu
 refreshenv
 
 Update-Ubuntu-Packages-Repository;
