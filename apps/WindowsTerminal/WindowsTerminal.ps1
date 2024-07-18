@@ -43,6 +43,7 @@ function Set-WindowsTerminal-Settings {
   Write-Host "Windows Terminal was successfully configured." -ForegroundColor "Green";
 }
 
+choco install -y "powershell-core"
 
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
 
