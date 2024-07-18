@@ -1,11 +1,11 @@
 function Update-Ubuntu-Packages-Repository {
   Write-Host "Updating Ubuntu package repository:" -ForegroundColor "Green";
-  wsl sudo apt --yes update;
+  ubuntu run sudo apt --yes update;
 }
 
 function Update-Ubuntu-Packages {
   Write-Host "Upgrading Ubuntu packages:" -ForegroundColor "Green";
-  wsl sudo apt --yes upgrade;
+  ubuntu run sudo apt --yes upgrade;
 }
 
 function Install-Ubuntu-Package {
@@ -17,29 +17,29 @@ function Install-Ubuntu-Package {
   )
 
   Write-Host "Installing ${PackageName} in Ubuntu:" -ForegroundColor "Green";
-  wsl sudo apt install --yes --no-install-recommends $PackageName;
+  ubuntu run sudo apt install --yes --no-install-recommends $PackageName;
 }
 
 function Set-Git-Configuration-In-Ubuntu {
   Write-Host "Configuring Git in Ubuntu:" -ForegroundColor "Green";
-  wsl git config --global init.defaultBranch "main";
-  wsl git config --global user.name $Config.GitUserName;
-  wsl git config --global user.email $Config.GitUserEmail;
-  wsl git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe";
-  wsl git config --list;
+  ubuntu run git config --global init.defaultBranch "main";
+  ubuntu run git config --global user.name $Config.GitUserName;
+  ubuntu run git config --global user.email $Config.GitUserEmail;
+  ubuntu run git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe";
+  ubuntu run git config --list;
   Write-Host "Git was successfully configured in Ubuntu." -ForegroundColor "Green";
 }
 
-function Install-VSCode-Extensions-In-WSL {
+function Install-VSCode-Extensions-In-ubuntu run {
   Write-Host "Installing Visual Studio Code extensions in WSL:" -ForegroundColor "Green";
 
-  wsl code --install-extension ue.alphabetical-sorter;
-  wsl code --install-extension ms-azuretools.vscode-docker;
-  wsl code --install-extension eamodio.gitlens;
-  wsl code --install-extension oderwat.indent-rainbow;
-  wsl code --install-extension davidanson.vscode-markdownlint;
-  wsl code --install-extension esbenp.prettier-vscode;
-  wsl code --install-extension rangav.vscode-thunder-client;
+  ubuntu run code --install-extension ue.alphabetical-sorter;
+  ubuntu run code --install-extension ms-azuretools.vscode-docker;
+  ubuntu run code --install-extension eamodio.gitlens;
+  ubuntu run code --install-extension oderwat.indent-rainbow;
+  ubuntu run code --install-extension davidanson.vscode-markdownlint;
+  ubuntu run code --install-extension esbenp.prettier-vscode;
+  ubuntu run code --install-extension rangav.vscode-thunder-client;
 }
 
 
@@ -48,11 +48,11 @@ function Install-OhMyZsh-In-Ubuntu {
 
   Invoke-WebRequest -o $DotfilesOhMyZshInstallerPath https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh;
 
-  $WslOhMyZshInstallerPath = wsl wslpath $DotfilesOhMyZshInstallerPath.Replace("\", "\\");
+  $WslOhMyZshInstallerPath = ubuntu run wslpath $DotfilesOhMyZshInstallerPath.Replace("\", "\\");
   
   Write-Host "Installing Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
   
-  wsl bash $WslOhMyZshInstallerPath --unattended;
+  ubuntu run bash $WslOhMyZshInstallerPath --unattended;
 }
 
 function Install-Zsh-Autosuggestions {
@@ -60,55 +60,55 @@ function Install-Zsh-Autosuggestions {
 
   Write-Host "Installing Zsh-Autosuggestions in Ubuntu:" -ForegroundColor "Green";
 
-  wsl rm -rf $ZshAutosuggestionsWslPath;
+  ubuntu run rm -rf $ZshAutosuggestionsWslPath;
 
-  wsl git clone https://github.com/zsh-users/zsh-autosuggestions $ZshAutosuggestionsWslPath;
+  ubuntu run git clone https://github.com/zsh-users/zsh-autosuggestions $ZshAutosuggestionsWslPath;
 }
 
 function Install-OhMyZsh-Theme-In-Ubuntu {
   $DotfilesOhMyZshThemePath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "paradox.zsh-theme";
-  $WslOhMyZshThemePath = wsl wslpath $DotfilesOhMyZshThemePath.Replace("\", "\\");
+  $WslOhMyZshThemePath = ubuntu run wslpath $DotfilesOhMyZshThemePath.Replace("\", "\\");
 
   Write-Host "Installing Paradox theme for Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  wsl cp -R $WslOhMyZshThemePath ~/.oh-my-zsh/custom/themes;
+  ubuntu run cp -R $WslOhMyZshThemePath ~/.oh-my-zsh/custom/themes;
 }
 
 function Install-OhMyZsh-Functions-In-Ubuntu {
   $DotfilesOhMyZshFunctionsPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "custom-actions.sh";
-  $WslOhMyZshFunctionsPath = wsl wslpath $DotfilesOhMyZshFunctionsPath.Replace("\", "\\");
+  $WslOhMyZshFunctionsPath = ubuntu run wslpath $DotfilesOhMyZshFunctionsPath.Replace("\", "\\");
 
   Write-Host "Installing custom alias and functions for Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  wsl mkdir -p ~/.oh-my-zsh/custom/functions;
+  ubuntu run mkdir -p ~/.oh-my-zsh/custom/functions;
 
-  wsl cp -R $WslOhMyZshFunctionsPath ~/.oh-my-zsh/custom/functions;
+  ubuntu run cp -R $WslOhMyZshFunctionsPath ~/.oh-my-zsh/custom/functions;
 }
 
 function Set-OhMyZsh-Configuration-In-Ubuntu {
   $DotfilesZshrcPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath ".zshrc";
-  $WslZshrcPath = wsl wslpath $DotfilesZshrcPath.Replace("\", "\\");
+  $WslZshrcPath = ubuntu run wslpath $DotfilesZshrcPath.Replace("\", "\\");
 
   Write-Host "Configuring Zsh in Ubuntu:" -ForegroundColor "Green";
   
-  wsl cp -R $WslZshrcPath ~;
+  ubuntu run cp -R $WslZshrcPath ~;
 }
 
 function Set-Zsh-As-Default-In-Ubuntu {
   Write-Host "Changing default shell to Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  $WslZshPath = wsl which zsh;
-  wsl sudo chsh -s $WslZshPath;
+  $WslZshPath = ubuntu run which zsh;
+  ubuntu run sudo chsh -s $WslZshPath;
 
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
-wsl --install
+ubuntu run --install
 refreshenv
-wsl --install -d Ubuntu
+ubuntu run --install -d Ubuntu
 refreshenv
 
-$UbuntuInstallStatus = wsl -l |Where {$_.Replace("`0","") -match '^Ubuntu'}
+$UbuntuInstallStatus = ubuntu run -l |Where {$_.Replace("`0","") -match '^Ubuntu'}
 if ($UbuntuInstallStatus -eq $null) {
   Write-Host "Ubuntu not installed. PC will restart in 10 seconds";
   
@@ -116,6 +116,7 @@ if ($UbuntuInstallStatus -eq $null) {
 }
 else {
   Write-Host "Ubuntu installed! Proceeding with dotfiles script";
+  ubuntu run --set-default Ubuntu
 }
 
 Update-Ubuntu-Packages-Repository;

@@ -84,8 +84,8 @@ function Update-System {
   Update-Help -Force;
   choco upgrade -y "chocolatey";
   choco upgrade -y all --execution-timeout 7200;
-  wsl sudo apt --yes update;
-  wsl sudo apt --yes upgrade;
+  ubuntu run sudo apt --yes update;
+  ubuntu run sudo apt --yes upgrade;
 };
 Set-Alias -Name "updsys" -Value "Update-System";
 
