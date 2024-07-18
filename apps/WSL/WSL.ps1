@@ -116,7 +116,8 @@ if ($UbuntuInstallStatus -eq $null) {
   wsl --install -d Ubuntu
   refreshenv
   Write-Host "Install complete. Restarting in 20 seconds";
-  Start-Sleep -Seconds 20;
+  Start-Sleep -Seconds 30;
+  Restart-Computer;
 }
 else {
   Write-Host "Ubuntu installed! Proceeding with dotfiles script";
