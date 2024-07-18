@@ -1,11 +1,11 @@
 function Update-Ubuntu-Packages-Repository {
   Write-Host "Updating Ubuntu package repository:" -ForegroundColor "Green";
-  ubuntu run sudo apt --yes update;
+  wsl sudo apt --yes update;
 }
 
 function Update-Ubuntu-Packages {
   Write-Host "Upgrading Ubuntu packages:" -ForegroundColor "Green";
-  ubuntu run sudo apt --yes upgrade;
+  wsl sudo apt --yes upgrade;
 }
 
 function Install-Ubuntu-Package {
@@ -17,29 +17,29 @@ function Install-Ubuntu-Package {
   )
 
   Write-Host "Installing ${PackageName} in Ubuntu:" -ForegroundColor "Green";
-  ubuntu run sudo apt install --yes --no-install-recommends $PackageName;
+  wsl sudo apt install --yes --no-install-recommends $PackageName;
 }
 
 function Set-Git-Configuration-In-Ubuntu {
   Write-Host "Configuring Git in Ubuntu:" -ForegroundColor "Green";
-  ubuntu run git config --global init.defaultBranch "main";
-  ubuntu run git config --global user.name $Config.GitUserName;
-  ubuntu run git config --global user.email $Config.GitUserEmail;
-  ubuntu run git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe";
-  ubuntu run git config --list;
+  wsl git config --global init.defaultBranch "main";
+  wsl git config --global user.name $Config.GitUserName;
+  wsl git config --global user.email $Config.GitUserEmail;
+  wsl git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe";
+  wsl git config --list;
   Write-Host "Git was successfully configured in Ubuntu." -ForegroundColor "Green";
 }
 
 function Install-VSCode-Extensions-In-WSL {
   Write-Host "Installing Visual Studio Code extensions in WSL:" -ForegroundColor "Green";
 
-  ubuntu run code-insiders --install-extension ue.alphabetical-sorter;
-  ubuntu run code-insiders --install-extension ms-azuretools.vscode-docker;
-  ubuntu run code-insiders --install-extension eamodio.gitlens;
-  ubuntu run code-insiders --install-extension oderwat.indent-rainbow;
-  ubuntu run code-insiders --install-extension davidanson.vscode-markdownlint;
-  ubuntu run code-insiders --install-extension esbenp.prettier-vscode;
-  ubuntu run code-insiders --install-extension rangav.vscode-thunder-client;
+  wsl code-insiders --install-extension ue.alphabetical-sorter;
+  wsl code-insiders --install-extension ms-azuretools.vscode-docker;
+  wsl code-insiders --install-extension eamodio.gitlens;
+  wsl code-insiders --install-extension oderwat.indent-rainbow;
+  wsl code-insiders --install-extension davidanson.vscode-markdownlint;
+  wsl code-insiders --install-extension esbenp.prettier-vscode;
+  wsl code-insiders --install-extension rangav.vscode-thunder-client;
 }
 
 
@@ -52,7 +52,7 @@ function Install-OhMyZsh-In-Ubuntu {
   
   Write-Host "Installing Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
   
-  ubuntu run bash $WslOhMyZshInstallerPath --unattended;
+  wsl bash $WslOhMyZshInstallerPath --unattended;
 }
 
 function Install-Zsh-Autosuggestions {
@@ -60,9 +60,9 @@ function Install-Zsh-Autosuggestions {
 
   Write-Host "Installing Zsh-Autosuggestions in Ubuntu:" -ForegroundColor "Green";
 
-  ubuntu run rm -rf $ZshAutosuggestionsWslPath;
+  wsl rm -rf $ZshAutosuggestionsWslPath;
 
-  ubuntu run git clone https://github.com/zsh-users/zsh-autosuggestions $ZshAutosuggestionsWslPath;
+  wsl git clone https://github.com/zsh-users/zsh-autosuggestions $ZshAutosuggestionsWslPath;
 }
 
 function Install-OhMyZsh-Theme-In-Ubuntu {
@@ -71,18 +71,18 @@ function Install-OhMyZsh-Theme-In-Ubuntu {
 
   Write-Host "Installing Paradox theme for Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  ubuntu run cp -R $WslOhMyZshThemePath ~/.oh-my-zsh/custom/themes;
+  wsl cp -R $WslOhMyZshThemePath ~/.oh-my-zsh/custom/themes;
 }
 
 function Install-OhMyZsh-Functions-In-Ubuntu {
   $DotfilesOhMyZshFunctionsPath = Join-Path -Path $DotfilesWorkFolder -ChildPath "WSL" | Join-Path -ChildPath "custom-actions.sh";
-  $WslOhMyZshFunctionsPath = ubuntu run wslpath $DotfilesOhMyZshFunctionsPath.Replace("\", "\\");
+  $WslOhMyZshFunctionsPath = wsl wslpath $DotfilesOhMyZshFunctionsPath.Replace("\", "\\");
 
   Write-Host "Installing custom alias and functions for Oh My Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  ubuntu run mkdir -p ~/.oh-my-zsh/custom/functions;
+  wsl mkdir -p ~/.oh-my-zsh/custom/functions;
 
-  ubuntu run cp -R $WslOhMyZshFunctionsPath ~/.oh-my-zsh/custom/functions;
+  wsl cp -R $WslOhMyZshFunctionsPath ~/.oh-my-zsh/custom/functions;
 }
 
 function Set-OhMyZsh-Configuration-In-Ubuntu {
@@ -91,21 +91,21 @@ function Set-OhMyZsh-Configuration-In-Ubuntu {
 
   Write-Host "Configuring Zsh in Ubuntu:" -ForegroundColor "Green";
   
-  ubuntu run cp -R $WslZshrcPath ~;
+  wsl cp -R $WslZshrcPath ~;
 }
 
 function Set-Zsh-As-Default-In-Ubuntu {
   Write-Host "Changing default shell to Zsh in Ubuntu:" -ForegroundColor "Green";
 
-  $WslZshPath = ubuntu run which zsh;
-  ubuntu run sudo chsh -s $WslZshPath;
+  $WslZshPath = wsl which zsh;
+  wsl sudo chsh -s $WslZshPath;
 
   # Change just for a user: sudo chsh -s $WslZshPath $USER_NAME;
 }
 
-ubuntu run --install
+wsl --install
 refreshenv
-ubuntu run --install -d Ubuntu
+wsl --install -d Ubuntu
 refreshenv
 
 $UbuntuInstallStatus = wsl -l |Where-Object {$_.Replace("`0","") -match '^Ubuntu'}

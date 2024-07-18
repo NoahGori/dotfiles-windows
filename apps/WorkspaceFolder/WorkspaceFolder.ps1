@@ -9,7 +9,7 @@ function Set-Workspace-Folder-Windows {
 
 function Set-Workspace-Folder-Ubuntu {
   Write-Host "Creating your development workspace folder in Ubuntu:" -ForegroundColor "Green";
-  ubuntu run mkdir -p -v ~/Workspace;
+  wsl mkdir -p -v ~/Workspace;
   Write-Host "Created development workspace folder!" -ForegroundColor "Green";
 }
 
