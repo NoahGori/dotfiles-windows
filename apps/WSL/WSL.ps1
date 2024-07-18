@@ -104,7 +104,9 @@ function Set-Zsh-As-Default-In-Ubuntu {
 }
 
 choco install -y "wsl2" --params "/Version:2 /Retry:true";
+refreshenv
 choco install -y "wsl-ubuntu-2204" --params "/InstallRoot:true" --execution-timeout 3600;
+refreshenv
 
 Update-Ubuntu-Packages-Repository;
 Update-Ubuntu-Packages;
