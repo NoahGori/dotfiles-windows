@@ -16,7 +16,7 @@ foreach ($DotfilesHelper in $DotfilesHelpers) {
 };
 
 # Save user configuration in persistencea
-Set-Configuration-File -DotfilesConfigFile $DotfilesConfigFile -GitUserName $GitUserName -GitUserEmail $GitUserEmail -WorkspaceDisk $WorkspaceDisk;
+Set-Configuration-File -DotfilesConfigFile $DotfilesConfigFile -GitUserName $GitUserName -GitUserEmail $GitUserEmail -WorkspaceDisk $WorkspaceDisk -WorkComputer $WorkComputer;
 
 # Load user configuration from persistence
 $Config = Get-Configuration-File -DotfilesConfigFile $DotfilesConfigFile;
@@ -54,6 +54,10 @@ Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "WindowsTermin
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Dotnet" | Join-Path -ChildPath "Dotnet.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Docker" | Join-Path -ChildPath "Docker.ps1");
 Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Windows" | Join-Path -ChildPath "Windows.ps1");
+if ($Config.WorkComputer -ne "y") {
+  Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Personal" | Join-Path -ChildPath "Personal.ps1");
+}
+Invoke-Expression (Join-Path -Path $DotfilesWorkFolder -ChildPath "Utility" | Join-Path -ChildPath "Utility.ps1");
 
 # Clean
 # Unregister script from RunOnce

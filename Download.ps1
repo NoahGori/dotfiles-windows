@@ -12,6 +12,12 @@ $GitUserName = Read-Host -Prompt "Input your Git user name here";
 
 $GitUserEmail = Read-Host -Prompt "Input your Git user email here";
 
+do {
+  $WorkComputer = Read-Host -Prompt "Is this a work machine? (y/n)";
+}
+while ($WorkComputer -ne "y" -or $WorkComputer -ne "n")
+
+
 $ValidDisks = Get-PSDrive -PSProvider "FileSystem" | Select-Object -ExpandProperty "Root";
 do {
   Write-Host "Choose the location of your development workspace:" -ForegroundColor "Green";

@@ -5,17 +5,21 @@ function Set-Configuration-File {
     [String]
     $DotfilesConfigFile,
     
-    [Parameter( Position = 2, Mandatory = $TRUE)]
+    [Parameter( Position = 1, Mandatory = $TRUE)]
     [String]
     $GitUserName,
     
-    [Parameter( Position = 3, Mandatory = $TRUE)]
+    [Parameter( Position = 2, Mandatory = $TRUE)]
     [String]
     $GitUserEmail,
 
+    [Parameter( Position = 3, Mandatory = $TRUE)]
+    [String]
+    $WorkspaceDisk,
+
     [Parameter( Position = 4, Mandatory = $TRUE)]
     [String]
-    $WorkspaceDisk
+    $WorkComputer
   )
 
   if (-not (Test-Path -Path $DotfilesConfigFile)) {
@@ -24,6 +28,7 @@ function Set-Configuration-File {
       GitUserName   = $GitUserName
       GitUserEmail  = $GitUserEmail
       WorkspaceDisk = $WorkspaceDisk
+      WorkComputer = $WorkComputer
     };
 
     Set-Content -Path $DotfilesConfigFile -Value ($ConfigJsonBody | ConvertTo-Json);
