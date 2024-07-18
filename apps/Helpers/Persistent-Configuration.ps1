@@ -4,10 +4,6 @@ function Set-Configuration-File {
     [Parameter( Position = 0, Mandatory = $TRUE)]
     [String]
     $DotfilesConfigFile,
-
-    [Parameter( Position = 1, Mandatory = $TRUE)]
-    [String]
-    $ComputerName,
     
     [Parameter( Position = 2, Mandatory = $TRUE)]
     [String]
@@ -25,7 +21,6 @@ function Set-Configuration-File {
   if (-not (Test-Path -Path $DotfilesConfigFile)) {
     Write-Host "Creating config.json file:" -ForegroundColor "Green";
     $ConfigJsonBody = [PSCustomObject]@{
-      ComputerName  = $ComputerName
       GitUserName   = $GitUserName
       GitUserEmail  = $GitUserEmail
       WorkspaceDisk = $WorkspaceDisk
