@@ -105,14 +105,15 @@ function Set-Zsh-As-Default-In-Ubuntu {
 
 wsl --install
 refreshenv
-wsl --install -d Ubuntu
-refreshenv
+
 
 $UbuntuInstallStatus = wsl -l |Where-Object {$_.Replace("`0","") -match '^Ubuntu'}
 if ($UbuntuInstallStatus -eq $null) {
-  Write-Host "Ubuntu not installed. PC will restart in 10 seconds";
-  
-  Start-Sleep -Seconds 10;
+  Write-Host "Ubuntu not installed. Attempting to install.";
+  wsl --install -d Ubuntu
+  refreshenv
+  Write-Host "Install complete. Restarting in 20 seconds";
+  Start-Sleep -Seconds 20;
 }
 else {
   Write-Host "Ubuntu installed! Proceeding with dotfiles script";
