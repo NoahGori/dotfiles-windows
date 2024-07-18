@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $GitHubRepositoryAuthor = "NoahGori";
 $GitHubRepositoryName = "dotfiles-windows";
 $DotfilesFolder = Join-Path -Path $HOME -ChildPath ".dotfiles";
@@ -140,5 +139,4 @@ Remove-Item $DotfilesFolder -Recurse -Force -ErrorAction SilentlyContinue;
 Write-Host "The process has finished." -ForegroundColor "Yellow";
 
 Write-Host "Restarting the PC in 10 seconds..." -ForegroundColor "Green";
->>>>>>> 000f80ad0ea762bfb4d391b2b14b2f6e1d6c225a
 Start-Sleep -Seconds 10;
