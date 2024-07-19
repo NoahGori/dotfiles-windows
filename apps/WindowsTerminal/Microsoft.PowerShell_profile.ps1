@@ -8,10 +8,10 @@ Clear-Host;
 #                                  Oh my Posh!                                 #
 ################################################################################
 
+oh-my-posh init pwsh --config "~/.oh-my-posh-custom-theme.omp.json" | Invoke-Expression ;
 Import-Module "posh-git";
 Import-Module "Terminal-Icons";
 Import-Module "PSReadLine";
-oh-my-posh init pwsh --config "~/.oh-my-posh-custom-theme.omp.json" | Invoke-Expression ;
 
 ################################################################################
 #                                  PSReadLine                                  #
